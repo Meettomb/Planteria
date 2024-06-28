@@ -41,12 +41,10 @@
     $loglinks="";
 
     if(session('user')){
-        $logname = 'Logout';
-        $loglinks = 'logout';  
+        $logname = 'Logout'; 
     }
     else{
         $logname = 'login / Sign up';
-        $loglinks = 'log_new';  
     }
 
 	$user_first = '';
@@ -128,12 +126,16 @@
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 										
 										<div class="profile_div">
-											<span class="login"><a href="/{{$loglinks}}"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span> {{$logname}}</a></span>
 											
 											@if(session('user'))
+											<span class="login"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span></span>
 											<div class="profile_drop">
 												<a class="profile_drop_a" href="/show_orders">Your Orders</a>
+												<a class="logout_link" href="/logout">Logout</a>
 											</div>
+											@else
+											<span class="login"><a href="/log_new"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span> {{$logname}}</a></span>
+
 											@endif
 										</div>
 										
