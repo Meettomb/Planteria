@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url(../img/login_back1.jpg);
+    background-size: cover;
+    font-size: 10px;
+}
+main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    padding: 20px 20px;
+    width: 20%;
+    background-color: rgba(255, 255, 255, 0.689);
+    backdrop-filter: blur(50px);
+    border-radius: 5px;
+    border: 1px black solid;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+form h1{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #ff8401;
+    position: relative;
+}
+form h1::after{
+    content: "";
+    width: 10%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(49, 194, 0);
+}
+section{
+    padding: 20px 0;
+}
+section .input_filds{
+    position: relative;
+    margin-top: 30px;
+}
+label{
+    font-size: 1rem;
+}
+
+input{
+    position: relative;
+    width: 90%;
+    padding: 3% 5%;
+    font-size: 1rem;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px black solid;
+}
+.button{
+    margin-top: 50px;
+    padding: 10px 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: transparent;
+    color: black;
+    border-radius: 10px;
+}
+span{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+a{
+    text-decoration: none;
+    color: rgb(223, 33, 33);
+    font-size: 1rem;
+}
+a:hover{
+    text-decoration: underline;
+    color: black;
+}
