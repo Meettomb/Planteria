@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\plants_c;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,7 @@ Route::get('vegetable','App\Http\Controllers\plants_c@vegetable');
 Route::get('flower','App\Http\Controllers\plants_c@flower');
 Route::get('hanging','App\Http\Controllers\plants_c@hanging');
 
+Route::get('/home',[plant_c::class,'search_plants']);
 Route::get('fruit_seed','App\Http\Controllers\plants_c@fruit_seed');
 Route::get('vegetable_seed','App\Http\Controllers\plants_c@vegetable_seed');
 
@@ -203,3 +205,10 @@ Route::get('set_discount', function () {
 });
 Route::post('/set_discount','App\Http\Controllers\plants_c@updateDiscount');
 Route::post('/m_discount','App\Http\Controllers\plants_c@main_Discount');
+
+
+
+// login and password
+// meet@gmail.com
+// b@g.com
+// 123
