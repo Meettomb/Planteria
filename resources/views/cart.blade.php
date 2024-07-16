@@ -53,14 +53,7 @@
 	
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
-	@if(session('error'))
-	<div class="alert alert-danger alert-dismissible fade show" style="z-index: 1000;"role="alert">
-		{{ session('error') }}
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-@endif
+	
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
@@ -74,99 +67,90 @@
 	</div>
 	<!-- end breadcrumb section -->
 
+
+	@if(session('error'))
+	<div class="alert alert-danger alert-dismissible fade show" style="z-index: 1000;"role="alert">
+		{{ session('error') }}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+@endif
 	<!-- cart -->
 	@if(isset($data))
-	<div class="cart-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-md-12">
-					<div class="cart-table-wrap">
-						<table class="cart-table">
-							<thead class="cart-table-head">
-								<tr class="table-head-row">
-									<th class="product-remove">#</th>
-									<th class="product-image">Product Image</th>
-									<th class="product-name">Name</th>
-									<th class="product-price">Price</th>
-									<th class="product-quantity">Quantity</th>
-									<th class="product-total">Total</th>
-									<th class="product-total">Remove</th>
-								</tr>
-							</thead>
-							<tbody>
-								@php
-									$gtotal = 0;
-								@endphp
+	
 
-								@foreach($data as $item)
-									@if($item->in_stock)
-										@php
-											$quan = $item->quantity;
-											$price = $item->dis_price;
-											$total = $quan * $price;
-											$gtotal += $total;
-										@endphp
+<div class="cart-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="cart-table-wrap">
+                    <table class="cart-table">
+                        <thead class="cart-table-head">
+                            <tr class="table-head-row">
+                                <th class="product-remove">#</th>
+                                <th class="product-image">Product Image</th>
+                                <th class="product-name">Name</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="product-total">Total</th>
+                                <th class="product-total">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $gtotal = 0;
+                            @endphp
 
-										<tr class="table-body-row">
-											<td class="product-serial">{{ $loop->iteration }}</td>
-											<td class="product-image"><img src="{{ asset('images/'.$item->p_image) }}" alt=""></td>
-											<td class="product-name">{{ $item->product_name }}</td>
-											<td class="product-price">₹{{ $item->dis_price }}</td>
-											<td class="product-quantity">{{ $item->quantity }}</td>
-											<td class="product-total">₹{{ $total }}</td>
-											<td class="product-remove"><a onclick="confirmation(event)" href="/cart/{{ $item->id }}"><i class="far fa-window-close text-danger" style="font-size: 1.5rem;"></i></a></td>
-										</tr>
-										@else
-										<tbody class="alert-danger">
-											<tr>
-												<td colspan="7">Out of Stock Your Cart items</td>
-											</tr>
-												<!-- <td>Out Of Stock Your Cart Product</td> -->
-											<tr class="table-body-row">
-												<td class="product-serial">{{ $loop->iteration }}</td>
-												<td class="product-image"><img src="{{ asset('images/'.$item->p_image) }}" alt=""></td>
-												<td class="product-name">{{ $item->product_name }}</td>
-												<td class="product-price">₹{{ $item->dis_price }}</td>
-												<td class="product-quantity">0</td>
-												<td class="product-total">₹{{ $total }}</td>
-												<td class="product-remove"><a onclick="confirmation(event)" href="/cart/{{ $item->id }}"><i class="far fa-window-close text-danger" style="font-size: 1.5rem;"></i></a></td>
-											</tr>
-										</tbody>
-									@endif
-								@endforeach
-							</tbody>
-						</table>
-					</div>
-				</div>
+                            @foreach($data as $item)
+                                @php
+                                    $quan = $item->quantity;
+                                    $price = $item->dis_price;
+                                    $total = $quan * $price;
+                                    $gtotal += $total;
+                                @endphp
 
-				<div class="col-lg-4">
-					<div class="total-section">
-						<table class="total-table">
-							<thead class="total-table-head">
-								<tr class="table-total-row">
-									<th>Grand Total</th>
-									<th>Price</th>
-								</tr>
-							</thead>
-							<tbody>
-								
-								</tr>
-								<tr class="total-data">
-									<td><strong>Total: </strong></td>
-									<td>₹{{$gtotal}}</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="cart-buttons">
-							<a href="/shop" class="boxed-btn ml-4 bg-success white">Shop More</a>
-							<a href="/checkout/{{$item->uid}}" class="boxed-btn black">Check Out</a>
-						</div>
-					</div>
+                                <tr class="table-body-row">
+                                    <td class="product-serial">{{ $loop->iteration }}</td>
+                                    <td class="product-image"><img src="{{ asset('images/'.$item->p_image) }}" alt=""></td>
+                                    <td class="product-name">{{ $item->product_name }}</td>
+                                    <td class="product-price">₹{{ $item->dis_price }}</td>
+                                    <td class="product-quantity">{{ $item->quantity }}</td>
+                                    <td class="product-total">₹{{ $total }}</td>
+                                    <td class="product-remove"><a onclick="confirmation(event)" href="/cart/{{ $item->id }}"><i class="far fa-window-close text-danger" style="font-size: 1.5rem;"></i></a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-				</div>
-			</div>
-		</div>
-	</div>
+            <div class="col-lg-4">
+                <div class="total-section">
+                    <table class="total-table">
+                        <thead class="total-table-head">
+                            <tr class="table-total-row">
+                                <th>Grand Total</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="total-data">
+                                <td><strong>Total: </strong></td>
+                                <td>₹{{ $gtotal }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="cart-buttons">
+                        <a href="/shop" class="boxed-btn ml-4 bg-success white">Shop More</a>
+                        <a href="/checkout/{{$item->uid}}" class="boxed-btn black">Check Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 	@else
 	<div class="empty-cart">
 		<div class="container p-4">

@@ -256,12 +256,28 @@ class plants_c extends Controller
     }
    
 
-    public function checkout($id){
-        $data = cart::where('uid', $id)->get();
+    public function checkout($id)
+    {
+        // Get the cart items for the user
+        $cartItems = cart::where('uid', $id)->get();
+
+        // Check stock for each cart item
+        foreach ($cartItems as $item) {
+            $product = product_data::find($item->pid); // Get product from product_data table
+
+            if ($product && $item->quantity > $product->quantity) {
+                // Redirect back to the cart with an error message if stock is insufficient
+                return redirect('/cart')->with('error', 'One or more items in your cart exceed the available stock.');
+            }
+        }
+
+        // If stock is sufficient, proceed to the checkout
         $userid = session()->get('userid');
-        $uinfo = login_clients::where('id',$userid)->get();
-        return view('checkout',['data'=>$data,'uinfo'=>$uinfo]);
+        $uinfo = login_clients::where('id', $userid)->get();
+
+        return view('checkout', ['data' => $cartItems, 'uinfo' => $uinfo]);
     }
+    
 
     public function single_checkout($id){
         $userid = session()->get('userid');
@@ -308,17 +324,17 @@ class plants_c extends Controller
         $data->dis_price = $after_discount;
 
         // updating cart after updating product
-        $product_in_cart = cart::where('pid',$req->id)->get();
-        if($product_in_cart){
-            $product_in_cart->pid = $req->id;
-            $product_in_cart->product_name = $req->p_name;
-            $product_in_cart->main_price = $req->main_price;
-            $product_in_cart->dis_price = $after_discount->dis_price;
-            if($req->quantity == 0){
-                $product_in_cart->quantity = $req->quantity;
-            }
-            $product_in_cart->save();
-        }
+        // $product_in_cart = cart::where('pid',$req->id)->get();
+        // if($product_in_cart){
+        //     $product_in_cart->pid = $req->id;
+        //     $product_in_cart->product_name = $req->p_name;
+        //     $product_in_cart->main_price = $req->main_price;
+        //     $product_in_cart->dis_price = $after_discount->dis_price;
+        //     if($req->quantity == 0){
+        //         $product_in_cart->quantity = $req->quantity;
+        //     }
+        //     $product_in_cart->save();
+        // }
 
 
         $Id = $data->save();
