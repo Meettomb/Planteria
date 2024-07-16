@@ -207,6 +207,11 @@ Route::post('/set_discount','App\Http\Controllers\plants_c@updateDiscount');
 Route::post('/m_discount','App\Http\Controllers\plants_c@main_Discount');
 
 
+Route::get('sendotp', function () {
+    return view('sendotp');
+});
+
+
 
 // login and password
 // meet@gmail.com
