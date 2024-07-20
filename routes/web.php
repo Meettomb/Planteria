@@ -207,11 +207,16 @@ Route::post('/set_discount','App\Http\Controllers\plants_c@updateDiscount');
 Route::post('/m_discount','App\Http\Controllers\plants_c@main_Discount');
 
 
-Route::get('sendotp', function () {
-    return view('sendotp');
+// check otp
+Route::get('/Mail',function(){
+    return view('Mail');
 });
 
+Route::get('/otppage',function(){
+    return view('otppage');
+});
 
+Route::post('/checkotp','App\Http\Controllers\login_controller@checkotp');
 
 // login and password
 // meet@gmail.com

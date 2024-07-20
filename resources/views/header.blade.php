@@ -83,7 +83,7 @@
 											<li><a href="/outdoor">Outdoor</a></li>
 											<li><a href="/indore">Indoor</a></li>
 											<li><a href="/fruit">Fruit Plant</a></li>
-											<li><a href="/vegetable">Vegetable Plant</a></li>
+											<li><a href="/vegetable">vegetable Plant</a></li>
 											<li><a href="/air">Air Plant</a></li>
 											<li><a href="/flower">Flower Plant</a></li>
 											<li><a href="/hanging">Hanging Plant</a></li>
@@ -126,18 +126,53 @@
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 										
 										<div class="profile_div">
-											
-											@if(session('user'))
-											<span class="login"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span></span>
-											<div class="profile_drop">
-												<a class="profile_drop_a" href="/show_orders">Your Orders</a>
-												<a class="logout_link" href="/logout">Logout</a>
-											</div>
-											@else
-											<span class="login"><a href="/log_new"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span> {{$logname}}</a></span>
-
-											@endif
+									@if(session('user'))
+										<span class="login"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span></span>
+										<div class="profile_drop">
+											<a class="mange_profile" href="#" id="manageProfileLink">Manage Profile</a>
+											<a class="profile_drop_a" href="/show_orders">Your Orders</a>
+											<a class="logout_link" href="/logout">Logout</a>
 										</div>
+									@else
+										<span class="login"><a href="/log_new"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span> {{$logname}}</a></span>
+									@endif
+								</div>
+
+								<div id="profilePopup" class="profile_popup">
+									<div class="popup_content">
+										<span class="close_popup"></span>
+										<h2>Manage Profile</h2>
+										<form action="" method="POST">
+											<label for="">First name</label>
+											<input type="text"><br>
+
+											<label for="">Last name</label>
+											<input type="text"><br>
+
+											<label for="">Gender</label>
+											<input type="text"><br>
+
+											<label for="">Date of Birth</label>
+											<input type="text"><br>
+
+											<label for="">Email</label>
+											<input type="email"><br>
+
+											<label for="">Phone number</label>
+											<input type="text"><br>
+
+											<label for="">Address</label>
+											<input type="text"><br>
+
+											<label for="">Pincode</label>
+											<input type="text"><br>
+
+											<button>Save</button>
+										</form>
+										<!-- Add your manage profile content here -->
+									</div>
+								</div>
+
 										
 									</div>
 
@@ -182,5 +217,35 @@
 		</div>
 	</div>
 	<!-- end search area -->
+
+	<script>
+    // Get the modal
+    var modal = document.getElementById("profilePopup");
+
+    // Get the link that opens the modal
+    var link = document.getElementById("manageProfileLink");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close_popup")[0];
+
+    // When the user clicks the link, open the modal 
+    link.onclick = function(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>

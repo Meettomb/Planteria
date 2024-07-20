@@ -128,7 +128,7 @@
 						</div>
 						<div class="content">
 							<h3>Free Shipping</h3>
-							<p>When order over $75</p>
+							<p>When order over ₹25</p>
 						</div>
 					</div>
 				</div>
@@ -150,7 +150,7 @@
 						</div>
 						<div class="content">
 							<h3>Refund</h3>
-							<p>Get refund within 3 days!</p>
+							<p>Get refund within 10 days!</p>
 						</div>
 					</div>
 				</div>

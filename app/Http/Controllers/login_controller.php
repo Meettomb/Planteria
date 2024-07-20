@@ -7,23 +7,15 @@ use App\Models\login_clients;
 use App\Models\cart;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Emailstuff;
+
 class login_controller extends Controller
 {
     //
     public function login(Request $req)
     {
         $data = new login_clients();
-
-        // $req->validate( [
-        //     'first_name' => 'required|max:255',
-        //     'last_name' => 'required|max:255',
-        //     'gender' => 'required|in:male,female',
-        //     'dob' => 'required|date|before:today',
-        //     'email' => 'required|email',
-        //     'phone' => 'required|digits:10',
-        //     'address' => 'required|string',
-        //     'pincode' => 'required|digits:6',
-        // ]);
 
         $data->first_name=$req->first_name;
         $data->last_name= $req->last_name;
@@ -33,19 +25,64 @@ class login_controller extends Controller
         $data->phone=$req->phone;
         $data->address=$req->address;
         $data->pincode=$req->pincode;
-        $data->password=Hash::make($req->password);
+        $data->password=$req->password;
         
-        // $info->Password=Hash::make($req->Password);
-
+        $otp = rand(100000, 999999);
+        $mail_data = [
+            'title' => 'Your Otp Code',
+            'body' => 'Your otp is' .$otp.'. It is valid for 15 minutes',
+        ];
+        try{
+            
+            Mail::to($data->email)->send(new Emailstuff($mail_data));
+        }catch (Exception $e) { 
+            // Log the exception message or handle it appropriately
+            Log::error('Email sending failed: ' . $e->getMessage());
+            // Optionally, you can echo or return a user-friendly message
+            echo 'There was an error sending the email. Please try again later.';
+        }
         
-        $id=$data->save();
+        return view('/otppage')->with('data',$data)->with('otp',$otp);
+        
+        // $id=$data->save();
 
-        if($id>0)
-        {
-            // $req->session()->put('user',$req->first_name);
-            return redirect('/log_new');
+    }
+
+
+    public function checkotp(Request $req){
+        $otpSubmitted = $req->input('otp');
+        $data = json_decode($req->input('data')); // Decode the JSON data
+        $otpValue = $req->input('otp_value');
+    
+        // Now you can use $data, $otpSubmitted, and $otpValue for your logic
+        // Example: Validate the OTP
+        if ($otpSubmitted == $otpValue) {
+            // OTP is valid, proceed with your logic
+            $client = new login_clients();
+
+            // Assign values from the decoded data to the model's attributes
+            $client->first_name = $data->first_name;
+            $client->last_name = $data->last_name;
+            $client->gender = $data->gender;
+            $client->dob = $data->dob;
+            $client->email = $data->email;
+            $client->phone = $data->phone;
+            $client->address = $data->address;
+            $client->pincode = $data->pincode;
+            $client->password = Hash::make($req->input('password'));
+
+
+            $id=$client->save();
+            if($id > 0){
+                return redirect()->route(''); // Redirect to a success page
+            }
+        } else {
+            // OTP is invalid, handle the error
+            return redirect()->back()->withErrors(['otp' => 'Invalid OTP.']);
         }
     }
+        
+    
     
     public function login_wall(Request $req){
         $data=login_clients::where('email',$req->email)->get();

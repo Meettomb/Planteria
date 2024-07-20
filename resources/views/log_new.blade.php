@@ -165,7 +165,7 @@
 		
         <div class="remember-forgot">
           <label><input onclick="password_show();" type="checkbox">Show Password</label>
-          <a href="/sendotp">Forgot Password</a>
+          <a href="#">Forgot Password</a>
         </div>
         <input class="button btn" type="submit" value="Login">
         <div class="register-link">
