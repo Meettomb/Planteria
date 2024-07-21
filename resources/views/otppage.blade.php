@@ -6,13 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/otppage" method="POST">
+<form action="{{ route('checkotp') }}" method="POST">
         @csrf
-        <input type="text" name="otp">
-         <!-- Hidden fields to send additional data -->
-         <input type="text" name="data" value="{{ json_encode($data) }}">
+        <input type="text" name="otp" placeholder="Enter OTP">
         <input type="hidden" name="otp_value" value="{{ $otp }}">
-
+        <input type="hidden" name="data" value="{{ $data }}">
         <input type="submit" value="Submit">
     </form>
 </body>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\plants_c;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\login_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,18 +96,8 @@ Route::get('/blog','App\Http\Controllers\bloge_c@search_blog');
 
 Route::get('/sale','App\Http\Controllers\plants_c@sale');
 
-Route::get('regi', function () {
-    return view('regi');
-});
 
-Route::post('regi','App\Http\Controllers\login_controller@login');
 
-Route::get('login_form',function(){
-    if(session()->has('user')){
-        return redirect('/');
-    }
-    return view('log_new');
-});
 
 Route::post('/login_form','App\Http\Controllers\login_controller@login_wall');
 Route::get('logout',function(){
@@ -138,13 +129,23 @@ Route::get('/gardening_service', function(){
     return view('gardening_service');
 });
 
+Route::get('/log_new', function () {
+    return view('log_new');
+})->name('log_new');
 
-Route::get('/log_new',function(){
+Route::get('login_form',function(){
     if(session()->has('user')){
         return redirect('/');
     }
     return view('log_new');
 });
+
+Route::get('/log_new', function () {
+    if (session()->has('user')) {
+        return redirect('/');
+    }
+    return view('log_new');
+})->name('log_new');
 
 Route::post('/log_new','App\Http\Controllers\login_controller@login_wall');
 
@@ -212,11 +213,19 @@ Route::get('/Mail',function(){
     return view('Mail');
 });
 
-Route::get('/otppage',function(){
-    return view('otppage');
-});
 
-Route::post('/checkotp','App\Http\Controllers\login_controller@checkotp');
+Route::get('/regi', function () {
+    return view('regi');
+});
+Route::post('/regi', [login_controller::class, 'register']);
+
+
+
+Route::get('/otppage', function() {
+    return view('otppage');
+})->name('otppage'); // Naming the route for better readability
+
+Route::post('/checkotp', [login_controller::class, 'checkotp'])->name('checkotp');
 
 // login and password
 // meet@gmail.com

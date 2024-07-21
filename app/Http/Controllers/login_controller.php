@@ -9,78 +9,92 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Emailstuff;
+use log;
 
 class login_controller extends Controller
 {
     //
-    public function login(Request $req)
+    public function register(Request $req)
     {
-        $data = new login_clients();
+        // Validate the request data
+        $validatedData = $req->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|string|max:50',
+            'dob' => 'required|date',
+            'email' => 'required|string|email|max:255|unique:login_clients',
+            'phone' => 'required|string|max:10|min:10|unique:login_clients',
+            'address' => 'required|string|max:255',
+            'pincode' => 'required|string|max:6|min:6',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-        $data->first_name=$req->first_name;
-        $data->last_name= $req->last_name;
-        $data->gender=$req->gender;
-        $data->dob=$req->dob;
-        $data->email=$req->email;
-        $data->phone=$req->phone;
-        $data->address=$req->address;
-        $data->pincode=$req->pincode;
-        $data->password=$req->password;
-        
+        // Check if email or phone number already exists
+        $existingUser = login_clients::where('email', $req->email)
+                                    ->orWhere('phone', $req->phone)
+                                    ->first();
+
+        if ($existingUser) {
+            return redirect()->back()->withErrors(['email_or_phone' => 'Email or phone number already exists.'])->withInput();
+        }
+
+        $data = new \stdClass();
+        $data->first_name = $req->first_name;
+        $data->last_name = $req->last_name;
+        $data->gender = $req->gender;
+        $data->dob = $req->dob;
+        $data->email = $req->email;
+        $data->phone = $req->phone;
+        $data->address = $req->address;
+        $data->pincode = $req->pincode;
+        $data->password = $req->password;
+
         $otp = rand(100000, 999999);
         $mail_data = [
-            'title' => 'Your Otp Code',
-            'body' => 'Your otp is' .$otp.'. It is valid for 15 minutes',
+            'title' => 'Your OTP Code',
+            'body' => 'Your OTP is ' . $otp . '. It is valid for 15 minutes',
         ];
-        try{
-            
+        try {
             Mail::to($data->email)->send(new Emailstuff($mail_data));
-        }catch (Exception $e) { 
-            // Log the exception message or handle it appropriately
+        } catch (Exception $e) {
             Log::error('Email sending failed: ' . $e->getMessage());
-            // Optionally, you can echo or return a user-friendly message
-            echo 'There was an error sending the email. Please try again later.';
+            return response()->json(['message' => 'There was an error sending the email. Please try again later.'], 500);
         }
-        
-        return view('/otppage')->with('data',$data)->with('otp',$otp);
-        
-        // $id=$data->save();
 
+        $json_data = json_encode($data);
+
+        return view('otppage')->with(['data' => $json_data, 'otp' => $otp]);
     }
 
+    public function checkotp(Request $req)
+{
+    $otpSubmitted = $req->input('otp');
+    $data = json_decode($req->input('data'));
+    $otpValue = $req->input('otp_value');
 
-    public function checkotp(Request $req){
-        $otpSubmitted = $req->input('otp');
-        $data = json_decode($req->input('data')); // Decode the JSON data
-        $otpValue = $req->input('otp_value');
-    
-        // Now you can use $data, $otpSubmitted, and $otpValue for your logic
-        // Example: Validate the OTP
-        if ($otpSubmitted == $otpValue) {
-            // OTP is valid, proceed with your logic
-            $client = new login_clients();
+    if ($otpSubmitted == $otpValue) {
+        $client = new login_clients();
 
-            // Assign values from the decoded data to the model's attributes
-            $client->first_name = $data->first_name;
-            $client->last_name = $data->last_name;
-            $client->gender = $data->gender;
-            $client->dob = $data->dob;
-            $client->email = $data->email;
-            $client->phone = $data->phone;
-            $client->address = $data->address;
-            $client->pincode = $data->pincode;
-            $client->password = Hash::make($req->input('password'));
+        $client->first_name = $data->first_name;
+        $client->last_name = $data->last_name;
+        $client->gender = $data->gender;
+        $client->dob = $data->dob;
+        $client->email = $data->email;
+        $client->phone = $data->phone;
+        $client->address = $data->address;
+        $client->pincode = $data->pincode;
+        $client->password = Hash::make($data->password);
 
-
-            $id=$client->save();
-            if($id > 0){
-                return redirect()->route(''); // Redirect to a success page
-            }
+        if ($client->save()) {
+            return redirect()->route('log_new'); // Redirect using the named route
         } else {
-            // OTP is invalid, handle the error
-            return redirect()->back()->withErrors(['otp' => 'Invalid OTP.']);
+            return redirect()->back()->withErrors(['db' => 'Failed to save user data.']);
         }
+    } else {
+        return redirect()->back()->withErrors(['otp' => 'Invalid OTP.']);
     }
+}
+
         
     
     

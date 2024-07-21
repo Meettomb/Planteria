@@ -135,7 +135,7 @@
   <div class="row d-flex flex-column">
 
     <div class="wrapper">
-      <form action="/log_new" method="post">
+      <form action="{{ route('log_new') }}" method="post">
         @csrf
         <h1>Login</h1>
         <div class="input-box">
