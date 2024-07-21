@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Otp</title>
+    <title>Reset Password</title>
 
     <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
 	<!-- google font -->
@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="{{asset('css/login-styles.css')}}">
 
 </head>
+
 <body>
 
     <div class="top-header-area" id="sticker">
@@ -51,25 +52,28 @@
 	</div>
 
 
+ 
 <div class="container">
   <div class="row d-flex flex-column">
+
     <div class="wrapper">
-
-    <form action="{{ route('checkotp') }}" method="POST">
-        <h2>For registartion</h2>
-        @csrf
+    <form action="{{ route('update_password') }}" method="POST">
+    @csrf
+    <h1>Reset Password</h1>
         <div class="input-box">
-            <input type="text" name="otp" placeholder="Enter OTP">
-            <input type="hidden" name="otp_value" value="{{ $otp }}">
-            <input type="hidden" name="data" value="{{ $data }}">
+            <input type="hidden" name="email" value="{{ $email }}">
+            <input type="password" name="password" placeholder="Enter new password" required>
+        
         </div>
-       
-        <input class="button btn" type="submit" value="Submit">
+		
+    
+        <input class="button btn" type="submit" value="Update Password">
     </form>
-
+   
     </div>
   </div>
 </div>
+
 
 </body>
 </html>

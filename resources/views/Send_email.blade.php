@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Otp</title>
-
-    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+    <title>Document</title>
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -28,7 +28,6 @@
 	<link rel="stylesheet" href="{{asset('css/responsive.css')}}">
 
   <link rel="stylesheet" href="{{asset('css/login-styles.css')}}">
-
 </head>
 <body>
 
@@ -51,25 +50,28 @@
 	</div>
 
 
+    
 <div class="container">
   <div class="row d-flex flex-column">
-    <div class="wrapper">
 
-    <form action="{{ route('checkotp') }}" method="POST">
-        <h2>For registartion</h2>
+    <div class="wrapper">
+    <form action="{{ route('send_email') }}" method="POST">
+        <h1>Send Otp for forgot password</h1>
         @csrf
         <div class="input-box">
-            <input type="text" name="otp" placeholder="Enter OTP">
-            <input type="hidden" name="otp_value" value="{{ $otp }}">
-            <input type="hidden" name="data" value="{{ $data }}">
+            <input type="email" name="email" id="email" placeholder="Enter your email" required autocomplete="off"> 
+            <i class='bx bxs-user'></i>
         </div>
-       
-        <input class="button btn" type="submit" value="Submit">
+		
+    
+        <input class="button btn" type="submit" value="Send Otp">
     </form>
-
+		
+      
     </div>
   </div>
 </div>
 
+    
 </body>
 </html>

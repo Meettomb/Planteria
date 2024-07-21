@@ -3,6 +3,7 @@
 use App\Http\Controllers\plants_c;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\login_controller;
+use App\Http\Controllers\ForgatePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -226,6 +227,53 @@ Route::get('/otppage', function() {
 })->name('otppage'); // Naming the route for better readability
 
 Route::post('/checkotp', [login_controller::class, 'checkotp'])->name('checkotp');
+
+Route::get('/Send_email', function() {
+    return view('Send_email');
+})->name('Send_email'); // Naming the route for better readability
+
+
+
+
+// Route for displaying the form to send OTP
+Route::get('/send_email', function () {
+    return view('send_email');
+})->name('send_email_form');
+
+// Route for handling OTP sending
+Route::post('/send_email', [ForgatePasswordController::class, 'send_email'])->name('send_email');
+
+// Route for displaying the form to verify OTP
+Route::get('/verify_forgot_password_otp', function () {
+    return view('verify_forgot_password_otp');
+})->name('verify_forgot_password_otp');
+
+// Route for handling OTP verification
+Route::post('/verify_otp', [ForgatePasswordController::class, 'verify_otp'])->name('verify_otp');
+
+// Route for displaying the form to reset password
+Route::get('/forgot_password', function (Request $request) {
+    $email = $request->query('email'); // Correctly access query parameters
+    return view('forgot_password', ['email' => $email]);
+})->name('forgot_password');
+// Route for displaying the form to reset password with email parameter
+Route::get('/forgot_password', [ForgatePasswordController::class, 'forgot_password'])->name('forgot_password');
+
+
+// Route for handling password update
+Route::post('/update_password', [ForgatePasswordController::class, 'update_password'])->name('update_password');
+
+// Route for login form and handling login
+// Route::get('/log_new', function () {
+//     return view('log_new');
+// })->name('log_new');
+
+// Route::post('/log_new', 'App\Http\Controllers\login_controller@login_wall');
+
+
+
+
+
 
 // login and password
 // meet@gmail.com

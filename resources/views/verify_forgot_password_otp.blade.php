@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Otp</title>
+    <title>Verify OTP</title>
 
     <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
 	<!-- google font -->
@@ -50,26 +50,31 @@
 		</div>
 	</div>
 
-
+  
 <div class="container">
   <div class="row d-flex flex-column">
+
     <div class="wrapper">
-
-    <form action="{{ route('checkotp') }}" method="POST">
-        <h2>For registartion</h2>
-        @csrf
+    <form action="{{ route('verify_otp') }}" method="POST">
+    @csrf
+    <h1>Verify OTP</h1>
+    <input type="hidden" name="email" value="{{ $email }}">
         <div class="input-box">
-            <input type="text" name="otp" placeholder="Enter OTP">
-            <input type="hidden" name="otp_value" value="{{ $otp }}">
-            <input type="hidden" name="data" value="{{ $data }}">
+        <input type="text" name="otp" placeholder="Enter OTP" required> 
+        
         </div>
-       
-        <input class="button btn" type="submit" value="Submit">
+		
+    
+        <input class="button btn" type="submit" value="Verifay Otp">
     </form>
-
+    @if(session('error'))
+        <p style="color:red;">{{ session('error') }}</p>
+    @endif
+      
     </div>
   </div>
 </div>
 
+  
 </body>
 </html>

@@ -67,61 +67,7 @@
 						<!-- logo -->
 
 						<!-- menu start -->
-						<nav class="main-menu">
-							<ul>
-								<li class="current-list-item"><a href="/">Home</a>
-								</li>
-								<!-- <li><a href="/about">About</a></li> -->
-								<li><a href="#">Category </a>
-									<ul class="sub-menu">
-										<ul>
-											<li class="nav_list_heading">Plants</li>
-											<li><a href="/outdoor">Outdoor</a></li>
-											<li><a href="/indore">Indoor</a></li>
-											<li><a href="/fruit">Fruit Plant</a></li>
-											<li><a href="/vegetable">Vegetable Plant</a></li>
-											<li><a href="/air">Air Plant</a></li>
-											<li><a href="/flower">Flower Plant</a></li>
-											<li><a href="/hanging">Hanging Plant</a></li>
-										</ul>
-										<ul>
-											<li class="nav_list_heading">Seed</li>
-											<li><a href="/fruit_seed">Fruits</a></li>
-											<li><a href="/vegetable_seed">Vegetable</a></li>
-										</ul>
-										<ul>
-											<li class="nav_list_heading">Pots</li>
-											<li><a href="/plastic_pots">Plastc pots</a></li>
-											<li><a href="/Wooden_pots">Wooden pots</a></li>
-											<li><a href="/ceramic_pots">Ceramic pots</a></li>
-										</ul>
-										<ul>
-											<li class="nav_list_heading">Equipments</li>
-											<li><a href="/Fertilizer">Fertilizer</a></li>
-											<li><a href="/Garden_tools">Garden Tools</a></li>
-											<li><a href="/Pets_control">Pets Control</a></li>
-										</ul>
-										<ul>
-											<li class="nav_list_heading">Packages</li>
-											<li><a href="/Plants_packages">Plants Packages</a></li>
-											<li><a href="/seed_packages">Seed Packages</a></li>
-											<li><a href="/Equipments_Packages">Equipments Packages</a></li>
-										</ul>
-										
-									</ul>
-								</li>
-
-								<li><a href="/news">News</a></li>
-								<li><a href="/gardening_service">Service</a></li>
-								<li><a href="/blog">Blog</a></li>
-
-								<li><a href="/contact">Contact</a></li>
-
-								<li><a href="/shop">Shop</a></li>
-							</ul>
-						</nav>
-						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-						<div class="mobile-menu"></div>
+						
 						<!-- menu end -->
 					</div>
 				</div>
@@ -165,7 +111,7 @@
 		
         <div class="remember-forgot">
           <label><input onclick="password_show();" type="checkbox">Show Password</label>
-          <a href="#">Forgot Password</a>
+          <a href="/Send_email">Forgot Password</a>
         </div>
         <input class="button btn" type="submit" value="Login">
         <div class="register-link">

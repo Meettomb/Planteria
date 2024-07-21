@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
+
+  
+
     <section class="container">
       <header>Registration Form</header>
       <form action="regi" method="post" class="form">
@@ -85,6 +88,10 @@
 
         <div class="remember-forgot" style="color: white; margin-top:2%;">
             <label><input onclick="password_show();" type="checkbox"> Show Password</label>
+        </div>
+
+        <div class="remember-forgot" style="color: white; margin-top:2%;">
+            <a href="/log_new" style="color: white;">back to login page</a>
         </div>
 
         @if ($errors->any())
