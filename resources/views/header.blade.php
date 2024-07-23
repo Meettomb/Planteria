@@ -127,10 +127,10 @@
 										
 										<div class="profile_div">
 									@if(session('user'))
-										<span class="login"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span></span>
+										<a href="/Setting"><span class="login"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span></span></a>
 										<div class="profile_drop">
-											<a class="mange_profile" href="#" id="manageProfileLink">Manage Profile</a>
-											<a class="profile_drop_a" href="/show_orders">Your Orders</a>
+											<!-- <a class="mange_profile" href="#" id="manageProfileLink">Manage Profile</a> -->
+											<a class="mange_profile" href="/Setting">Setting</a><br>
 											<a class="logout_link" href="/logout">Logout</a>
 										</div>
 									@else

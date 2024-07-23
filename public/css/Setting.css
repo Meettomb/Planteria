@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.top-header-area{
+    background-color: #051922;
+    position: absolute;
+    top: 0;
+    position: fixed;
+}
+.manage_profile_container{
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+}
+.manage_profile_container section{
+    width: 60%;
+    padding: 0 10px 0 10px;
+    background-color: rgb(213, 210, 210);
+}

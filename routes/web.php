@@ -130,16 +130,17 @@ Route::get('/gardening_service', function(){
     return view('gardening_service');
 });
 
-Route::get('/log_new', function () {
-    return view('log_new');
-})->name('log_new');
-
 Route::get('login_form',function(){
     if(session()->has('user')){
         return redirect('/');
     }
     return view('log_new');
 });
+
+Route::get('/log_new', function () {
+    return view('log_new');
+})->name('log_new');
+
 
 Route::get('/log_new', function () {
     if (session()->has('user')) {
@@ -273,6 +274,9 @@ Route::post('/update_password', [ForgatePasswordController::class, 'update_passw
 
 
 
+Route::get('Setting', function () {
+    return view('Setting');
+});
 
 
 // login and password
