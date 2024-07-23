@@ -27,8 +27,8 @@ class ForgatePasswordController extends Controller
     $req->session()->put('otp', $otp); // Store OTP in the session
 
     $mail_data = [
-        'title' => 'Your OTP Code',
-        'body' => 'Your OTP is ' . $otp . '. It is valid until used.',
+        'title' => 'To Reset Password',
+        'body' =>  $otp . '. It is valid until used.',
     ];
 
     try {

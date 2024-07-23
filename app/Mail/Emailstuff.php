@@ -37,7 +37,7 @@ class Emailstuff extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Emailstuff',
+            subject: '[Planteria] Please verify your Email ',
         );
     }
 

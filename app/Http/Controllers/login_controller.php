@@ -52,7 +52,7 @@ class login_controller extends Controller
         $otp = rand(100000, 999999);
         $mail_data = [
             'title' => 'Your OTP Code',
-            'body' => 'Your OTP is ' . $otp . '. It is valid for 15 minutes',
+            'body' => $otp,
         ];
         try {
             Mail::to($data->email)->send(new Emailstuff($mail_data));
@@ -67,33 +67,33 @@ class login_controller extends Controller
     }
 
     public function checkotp(Request $req)
-{
-    $otpSubmitted = $req->input('otp');
-    $data = json_decode($req->input('data'));
-    $otpValue = $req->input('otp_value');
+    {
+        $otpSubmitted = $req->input('otp');
+        $data = json_decode($req->input('data'));
+        $otpValue = $req->input('otp_value');
 
-    if ($otpSubmitted == $otpValue) {
-        $client = new login_clients();
+        if ($otpSubmitted == $otpValue) {
+            $client = new login_clients();
 
-        $client->first_name = $data->first_name;
-        $client->last_name = $data->last_name;
-        $client->gender = $data->gender;
-        $client->dob = $data->dob;
-        $client->email = $data->email;
-        $client->phone = $data->phone;
-        $client->address = $data->address;
-        $client->pincode = $data->pincode;
-        $client->password = Hash::make($data->password);
+            $client->first_name = $data->first_name;
+            $client->last_name = $data->last_name;
+            $client->gender = $data->gender;
+            $client->dob = $data->dob;
+            $client->email = $data->email;
+            $client->phone = $data->phone;
+            $client->address = $data->address;
+            $client->pincode = $data->pincode;
+            $client->password = Hash::make($data->password);
 
-        if ($client->save()) {
-            return redirect()->route('log_new'); // Redirect using the named route
+            if ($client->save()) {
+                return redirect()->route('log_new'); // Redirect using the named route
+            } else {
+                return redirect()->back()->withErrors(['db' => 'Failed to save user data.']);
+            }
         } else {
-            return redirect()->back()->withErrors(['db' => 'Failed to save user data.']);
+            return redirect()->back()->withErrors(['otp' => 'Invalid OTP.']);
         }
-    } else {
-        return redirect()->back()->withErrors(['otp' => 'Invalid OTP.']);
     }
-}
 
         
     

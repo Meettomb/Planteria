@@ -7,6 +7,8 @@
 </head>
 <body>
     <h1>{{$mail_data['title']}}</h1>
-    <h1>{{$mail_data['body']}}</h1>
+    <p>Your OTP is : <b>{{$mail_data['body']}}</b></p>
+    <p>Thank you for choosing Us</p>
+    <p>Planteria Team</p>
 </body>
 </html>

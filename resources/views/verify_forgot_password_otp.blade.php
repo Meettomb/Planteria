@@ -65,7 +65,7 @@
         </div>
 		
     
-        <input class="button btn" type="submit" value="Verifay Otp">
+        <input class="button btn" type="submit" value="Verify Otp">
     </form>
     @if(session('error'))
         <p style="color:red;">{{ session('error') }}</p>

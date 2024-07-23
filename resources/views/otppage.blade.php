@@ -30,6 +30,11 @@
   <link rel="stylesheet" href="{{asset('css/login-styles.css')}}">
 
 </head>
+<style>
+	form > h2 {
+		color: white;
+	}
+</style>
 <body>
 
     <div class="top-header-area" id="sticker">

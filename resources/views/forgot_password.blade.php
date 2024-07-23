@@ -63,10 +63,7 @@
         <div class="input-box">
             <input type="hidden" name="email" value="{{ $email }}">
             <input type="password" name="password" placeholder="Enter new password" required>
-        
         </div>
-		
-    
         <input class="button btn" type="submit" value="Update Password">
     </form>
    
