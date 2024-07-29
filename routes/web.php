@@ -272,11 +272,9 @@ Route::post('/update_password', [ForgatePasswordController::class, 'update_passw
 // Route::post('/log_new', 'App\Http\Controllers\login_controller@login_wall');
 
 
+Route::get('/Setting', [login_controller::class, 'userSetting']);
 
-
-Route::get('Setting', function () {
-    return view('Setting');
-});
+Route::post('/userUpdate', [login_controller::class, 'changeUserData']);
 
 
 // login and password

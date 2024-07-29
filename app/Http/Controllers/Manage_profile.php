@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LoginClient;
+use App\Models\login_clients;
+
+
 
 class Manage_profile extends Controller
 {
@@ -19,4 +22,5 @@ class Manage_profile extends Controller
 
         return view('/header', ['user' => $user]);
     }
+
 }

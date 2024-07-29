@@ -16,6 +16,37 @@
 }
 .manage_profile_container section{
     width: 60%;
-    padding: 0 10px 0 10px;
+    padding: 30px;
     background-color: rgb(213, 210, 210);
+}
+
+.row{
+    margin: 0.6em 0;
+    /* padding: 10px; */
+    /* background-color: #051922; */
+}
+
+input[type='submit']{
+    width: 30%;    
+}
+
+label{
+    font-size: 1.2rem;
+    padding-right: 5px; 
+    /* background-color: #051922;
+    color: white; */
+}
+
+input[type='text']{
+    border-radius: 20px;
+    border-style: solid;
+    padding: 0 5px;
+    margin: 0 20px 0 10px;
+    height: 2.5em;
+}
+
+.input-box{
+    /* margin: 0.5em 0;       */
+    display: flex;
+    /* background-color: #051922; */
 }

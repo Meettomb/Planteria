@@ -129,4 +129,68 @@ class login_controller extends Controller
         $data = login_clients :: all();
         return view('all_login_list',['data'=>$data]);
     }
+
+    // Edit data
+    public function userSetting(){
+
+        if(session()->has('userid')){
+            
+            $userid = session()->get('userid');
+            $user = login_clients::find($userid);
+             
+            return view('Setting',['data'=>$user]);
+             
+        } else {
+            return redirect('/log_new');
+        }
+    }
+
+    // Validate the request data
+    public function changeUserData(Request $req){
+
+
+        $validatedData = $req->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required|string|max:50',
+            'dob' => 'required|date',
+            'address' => 'required|string|max:255',
+            'pincode' => 'required|string|max:6|min:6',
+        ]);
+    
+        try {
+            $updated = login_clients::find($req->id);
+    
+            $updated->first_name = $req->first_name; 
+            $updated->last_name = $req->last_name; 
+            $updated->gender = $req->gender; 
+            $updated->DOB = $req->DOB; 
+            $updated->address = $req->address; 
+            $updated->pincode = $req->pincode; 
+            
+            $id = $updated->save();
+            
+            if($id > 0){
+                $carts = cart::where('uid',$req->id)->get();
+                
+                foreach ($carts as $cart) {
+                    $cart->first_name = $req->first_name; 
+                    $cart->last_name = $req->last_name; 
+                    $cart->gender = $req->gender; 
+                    $cart->DOB = $req->DOB; 
+                    $cart->address = $req->address; 
+                    $cart->pincode = $req->pincode; 
+                    $cart->save();
+                }
+            }
+            
+            return redirect('/Setting')->with('success', 'User data updated successfully.');
+        } catch (Exception $e) {
+            Log::error('Email sending failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while updating user data.');
+        }
+    }
+    
 }
+
+
