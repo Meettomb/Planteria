@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Emailstuff;
-use log;
+use Illuminate\Support\Facades\Log; // Add this import
+use Exception;
 
 class login_controller extends Controller
 {
@@ -146,8 +147,10 @@ class login_controller extends Controller
     }
 
     // Validate the request data
-    public function changeUserData(Request $req){
-
+    public function changeUserData(Request $req)
+    {
+        // Log incoming request data
+        Log::info('Request data:', $req->all());
 
         $validatedData = $req->validate([
             'first_name' => 'required|string|max:255',
@@ -157,39 +160,54 @@ class login_controller extends Controller
             'address' => 'required|string|max:255',
             'pincode' => 'required|string|max:6|min:6',
         ]);
-    
+
         try {
-            $updated = login_clients::find($req->id);
-    
-            $updated->first_name = $req->first_name; 
-            $updated->last_name = $req->last_name; 
-            $updated->gender = $req->gender; 
-            $updated->DOB = $req->DOB; 
-            $updated->address = $req->address; 
-            $updated->pincode = $req->pincode; 
+            $user = login_clients::find($req->id);
+
+            // Check if user exists
+            if (!$user) {
+                Log::error('User not found with id: ' . $req->id);
+                return redirect()->back()->with('error', 'User not found.');
+            }
+
+            // Log before updating
+            Log::info('User before update:', $user->toArray());
+
+            // Update user fields
+            $user->first_name = $req->first_name;
+            $user->last_name = $req->last_name;
+            $user->gender = $req->gender;
+            $user->dob = $req->dob; // Ensure 'dob' matches the form field name
+            $user->address = $req->address;
+            $user->pincode = $req->pincode;
             
-            $id = $updated->save();
-            
-            if($id > 0){
-                $carts = cart::where('uid',$req->id)->get();
-                
+            $updated = $user->save();
+
+            // Log after updating
+            Log::info('User after update:', $user->toArray());
+
+            if ($updated) {
+                $carts = cart::where('uid', $req->id)->get();
+
                 foreach ($carts as $cart) {
-                    $cart->first_name = $req->first_name; 
-                    $cart->last_name = $req->last_name; 
-                    $cart->gender = $req->gender; 
-                    $cart->DOB = $req->DOB; 
-                    $cart->address = $req->address; 
-                    $cart->pincode = $req->pincode; 
+                    $cart->first_name = $req->first_name;
+                    $cart->last_name = $req->last_name;
+                    $cart->gender = $req->gender;
+                    $cart->dob = $req->dob; // Ensure 'dob' matches the form field name
+                    $cart->address = $req->address;
+                    $cart->pincode = $req->pincode;
                     $cart->save();
                 }
             }
-            
-            return redirect('/Setting')->with('success', 'User data updated successfully.');
+
+            return redirect()->back()->with('success', 'User data updated successfully.');
         } catch (Exception $e) {
-            Log::error('Email sending failed: ' . $e->getMessage());
+            Log::error('Data update failed: ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while updating user data.');
         }
     }
+    
+
     
 }
 

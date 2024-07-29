@@ -60,52 +60,70 @@
 </div>
 
 <div class="manage_profile_container">
-    <section class="container">
-        <h1>Change Details</h1>
-        @isset($data)
-        <form action="/userUpdate" method="post" class="form">
-            @csrf
-            <div class="row">
-                <div class="input-box">
-                    <label for="first_name">First name : </label>
-                    <input type="text" id="first_name" name="first_name" value="{{$data->first_name}}">
-                </div>
+<section class="container">
+    <h1>Change Details</h1>
+    @isset($data)
+    <form action="/Setting" method="post" class="form">
+        @csrf
 
-                <div class="input-box">
-                    <label for="last_name">Last name : </label>
-                    <input type="text" id="last_name" name="last_name" value="{{$data->last_name}}">
+        <!-- user id as hidden-->
+        <input type="hidden" name="id" value="{{ $data->id }}">
+<table>
+    
+            <tr>
+                 <div class="input-box">
+                    <th><label for="first_name">First name : </label></th>
+                    <td><input type="text" id="first_name" name="first_name" value="{{ $data->first_name }}"></td>
                 </div>
-            </div>
-            
-            <div class="row">
-                <div class="input-box">
-                    <label for="address">Address : </label>
-                    <input type="text" name="address" id="address" value="{{$data->address}}">
-                </div>
-                <div class="input-box">
-                    <label for="pincode">Pincode : </label>
-                    <input type="text" name="pincode" id="pincode" value="{{$data->pincode}}">
-                </div>
-            </div>
+            </tr>
 
-            <div class="row">
+            <tr>
                 <div class="input-box">
-                    <label for="phone">Phone No. : </label>
-                    <input type="text" name="phone" id="phone" value="{{$data->phone}}">
+                    <th><label for="last_name">Last name : </label></th>
+                    <td><input type="text" id="last_name" name="last_name" value="{{ $data->last_name }}"></td>
                 </div>
-                <div class="input-box">
-                    <label for="dob">DOB :</label>
-                    <input type="text" name="dob" id="dob" value="{{$data->dob}}">
-                </div>
-            </div>
-                    
-            <!-- user id as hidden-->
-            <input type="hidden" name="id" value="{{$data->id}}">
+            </tr>
 
-            <input type="submit" value="Submit">
-        </form>
-        @endisset
-    </section>    
+            <tr>
+                <div class="input-box">
+                    <th><label for="address">Address : </label></th>
+                    <td><input type="text" name="address" id="address" value="{{ $data->address }}"></td>
+                </div>
+            </tr>
+
+            <tr>
+                <div class="input-box">
+                    <th><label for="pincode">Pincode : </label></th>
+                    <td><input type="text" name="pincode" id="pincode" value="{{ $data->pincode }}"></td>
+                </div>
+            </tr>
+
+            <tr>
+                <div class="input-box">
+                    <th><label for="phone">Phone No :</label></th>
+                    <td><input type="text" name="phone" id="phone" value="{{ $data->phone }}"></td>
+                </div>
+            </tr>
+            <tr>
+                <div class="input-box">
+                    <th><label for="dob">DOB :</label></th>
+                    <td><input type="text" name="dob" id="dob" value="{{ $data->dob }}"></td>
+                </div>
+            </tr>
+
+            <tr>
+                <th></th>
+                <td>
+                    <input type="submit" value="Save">
+                </td>
+            </tr>
+        
+</table>
+    </form>
+    @endisset
+</section>
+
+
 
     <!-- Error handing  -->
     @if(session('success'))

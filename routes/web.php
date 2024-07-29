@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\login_controller;
 use App\Http\Controllers\ForgatePasswordController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -271,11 +272,8 @@ Route::post('/update_password', [ForgatePasswordController::class, 'update_passw
 
 // Route::post('/log_new', 'App\Http\Controllers\login_controller@login_wall');
 
-
 Route::get('/Setting', [login_controller::class, 'userSetting']);
-
-Route::post('/userUpdate', [login_controller::class, 'changeUserData']);
-
+Route::post('/Setting', [login_controller::class, 'changeUserData']);
 
 // login and password
 // meet@gmail.com
