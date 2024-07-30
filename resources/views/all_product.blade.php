@@ -171,7 +171,7 @@
                             <tbody>
                                 <tr class="tr2">
                                     <td scope="row">{{$loop->iteration}}</td>
-                                    <td class="data"><a href="/edit_image/{{$in->id}}"><img
+                                    <td class="data"><a href="/product_image_edit/{{$in->id}}"><img
                                                 src="{{ asset('images/'.$in->p_image) }} " alt=""></a></td>
                                     <td>{{$in->p_name}}</td>
                                     <td>{{$in->pm_category}}</td>

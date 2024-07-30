@@ -191,12 +191,7 @@ class login_controller extends Controller
                 $carts = cart::where('uid', $req->id)->get();
                 // dd($carts);
                 foreach ($carts as $cart) {
-                    $cart->first_name = $req->first_name;
-                    $cart->last_name = $req->last_name;
-                    $cart->gender = $req->gender;
-                    $cart->dob = $req->dob; // Ensure 'dob' matches the form field name
-                    $cart->address = $req->address;
-                    $cart->pincode = $req->pincode;
+                    $cart->first_name = $req->uname;
                     $cart->save();
                 }
             }
@@ -208,7 +203,11 @@ class login_controller extends Controller
         }
     }
     
-
+    public function Single_person_details($id){
+        $data = login_clients::find($id);
+        return view('person_details',['data'=>$data]);
+    }
+    
     
 }
 

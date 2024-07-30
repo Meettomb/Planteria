@@ -45,7 +45,7 @@
 						<h2 class="widget-title">Get in Touch</h2>
 						<ul>
 						<li>34/8, East Bopal <br> Guajrat, Ahmedabad, India</li>
-							<li>support@Planteria.com</li>
+							<li>ourplanteria@gmail.com</li>
 							<li>+00 111 222 3333</li>
 						</ul>
 					</div>

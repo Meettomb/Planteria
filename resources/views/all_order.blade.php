@@ -170,47 +170,7 @@ if(session('admin')){
                                 </table>
                             </div>
 
-                            <div id="table2" class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">User Id</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">First Name</th>
-                                            <th scope="col">Address</th>
-                                            <th scope="col">City</th>
-                                            <th scope="col">State</th>
-                                            <th scope="col">Pincode</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Payment Methode</th>
-                                            <th scope="col">Order_id</th>
-
-                                        </tr>
-                                    </thead>
-                                    @foreach($data2 as $in)
-                                    <tbody>
-                                        <tr class="tr2" >
-                                            <td scope="row">{{$loop->iteration}}</td>
-                                            <td scope="row">{{$in->uid}}</td>
-                                            <td scope="row">{{$in->email}}</td>
-                                            <td scope="row">{{$in->first_name}}</td>
-                                            <td scope="row">{{$in->address}}</td>
-                                            <td scope="row">{{$in->city}}</td>
-                                            <td scope="row">{{$in->state}}</td>
-                                            <td scope="row">{{$in->pincode}}</td>
-                                            <td scope="row">{{$in->phone}}</td>
-                                            <td scope="row">{{$in->price}}</td>
-                                            <td scope="row">{{$in->payment_method}}</td>
-                                            <td scope="row">{{$in->order_id}}</td>
-                                            <!-- <td scope="row"><a style="color:black;" href="/edit_order/{{$in->id}}">{{$in->status}}</a></td> -->
-
-                                        </tr>
-                                    </tbody>
-                                    @endforeach
-                                </table>
-                            </div>
+                           
                         </div>
                     </div>
 

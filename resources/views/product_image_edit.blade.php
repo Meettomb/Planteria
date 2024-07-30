@@ -6,9 +6,16 @@
     <title>Login list</title>
 
 
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Data Edit</title>
+    <link rel="icon" type="image/x-icon" href="{{asset('img/logo4.png')}}">
+    <link rel="stylesheet" href="{{ asset('css/plant_insert.css')}}">
+    <script src="{{asset('javascript\jQuery.js')}}"></script> 
+    <script src="{{asset('js\script.js')}}"></script>  
+    <link rel="stylesheet" href="{{asset('fontawesome-free-6.5.1\css\all.min.css')}}">
+
+
     <link rel="icon" type="image/x-icon" href="{{asset('img/logo4.png')}}">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -27,14 +34,14 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
      <!-- icons -->
 	<link rel="stylesheet" href="{{asset('css/all.min.css')}}">
-    <script src="{{asset('js\jQuery.js')}}"></script>   
+ 
 </head>
 <body>
 @php
@@ -72,12 +79,12 @@ if(session('admin')){
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="admin_index" class="navbar-brand mx-4 mb-3">
+                <a href="/admin_index" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img class="me-2 w-25" src="{{asset('img/logo4.png')}}" alt="">Planteria</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="{{asset('img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -131,46 +138,25 @@ if(session('admin')){
             <!-- Navbar End -->
 
             <div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Product Table</h6>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">userid</th>
-                                            <th scope="col">First Name</th>
-                                            <th scope="col">Last Name</th>
-                                            <th scope="col">gender</th>
-                                            <th scope="col">DOB</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Address</th>
-                                            <th scope="col">Pincode</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach($data as $in)
-                                    <tbody>
-                                        <tr class="tr2" >
-                                            <td scope="row">{{$loop->iteration}}</td>
-                                            <td scope="row">{{$in->id}}</td>
-                                            <td scope="row">{{$in->first_name}}</td>
-                                            <td scope="row">{{$in->last_name}}</td>
-                                            <td scope="row">{{$in->gender}}</td>
-                                            <td scope="row">{{$in->dob}}</td>
-                                            <td scope="row">{{$in->email}}</td>
-                                            <td scope="row">{{$in->phone}}</td>
-                                            <td scope="row">{{$in->address}}</td>
-                                            <td scope="row">{{$in->pincode}}</td>
-                                            <td><a href="/person_details/{{$in->id}}">Details</a></td>
-                                        </tr>
-                                    </tbody>
-                                    @endforeach
-                                </table>
-                            </div>
-                        </div>
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">User Detail</h6>
+                    <div class="table-responsive">
+                    
+                    <form action="/product_image_edit" method="post" enctype="multipart/form-data">
+                        @csrf  
+                        <input type="hidden" name="id" value="{{$data->id}}">
+
+                        <input type="file" name="img1"><br>
+
+                        <input type="submit" name="submit">
+                    </form>
+
+
+                        <br><br>
+                        <p style="color: darkcyan; cursor:pointer; font-size: 18px;" onclick="goBack()">back to list</p>
                     </div>
+                </div>
+            </div>
 
 
 </div>
@@ -188,16 +174,22 @@ if(session('admin')){
     <!-- Template Javascript -->
     <script src="{{asset('jsjava/main.js')}}"></script>
 
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
     
     <script>
-    $(document).ready(function(){
-        $("#myInput").on("keyup",function(){    //This Id Is Search Field Id
-            var value = $(this).val().toLowerCase();
-            $(".tr2").filter(function(){        //This Class Is My Tag Where Search Data
-                $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1);                      
+        $(document).ready(function(){
+            $("#myInput").on("keyup",function(){    //This Id Is Search Field Id
+                var value = $(this).val().toLowerCase();
+                $(".tr2").filter(function(){        //This Class Is My Tag Where Search Data
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1);                      
+                });
             });
         });
-    });
-</script>
+    </script>
 </body>
 </html>

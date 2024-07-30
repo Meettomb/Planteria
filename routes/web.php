@@ -30,9 +30,7 @@ Route::get('404', function () {
 Route::get('about', function () {
     return view('about');
 });
-// Route::get('cart', function () {
-//     return view('cart');
-// });
+
 // Route::get('checkout', function () {
 //     return view('checkout');
 // });
@@ -274,6 +272,19 @@ Route::post('/update_password', [ForgatePasswordController::class, 'update_passw
 
 Route::get('/Setting', [login_controller::class, 'userSetting']);
 Route::post('/Setting', [login_controller::class, 'changeUserData']);
+
+
+Route::get('/person_details/{id}',[login_controller::class, 'Single_person_details']);
+
+Route::get('product_image_edit', function () {
+    return view('product_image_edit');
+});
+
+Route::get('/product_image_edit/{id}',[plants_c::class, 'get_product_image_edit']);
+Route::post('/product_image_edit', [plants_c::class, 'update_product_image_edit']);
+// routes/web.php
+
+// routes/web.php
 
 // login and password
 // meet@gmail.com

@@ -403,4 +403,25 @@ class plants_c extends Controller
             return view('links.category')->with('info', $info);
         }
     }
+
+    public function get_product_image_edit($id){
+        $data = product_data::find($id);
+        return view('product_image_edit',['data'=>$data]);
+    }
+    
+    public function update_product_image_edit(Request $req) {
+        $data = product_data::find($req->id);
+    
+        if ($req->hasFile('img1')) {
+            $filename1 = $req->file('img1')->getClientOriginalName();
+            $destinationPath = 'images'; // Adjust path if necessary
+            $req->file('img1')->move(public_path($destinationPath), $filename1);
+            $data->p_image = $filename1;
+        }
+    
+        $data->save();
+        return redirect('all_product');
+    }
+    
+
 }
