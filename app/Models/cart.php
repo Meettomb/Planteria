@@ -9,5 +9,6 @@ class cart extends Model
 {
     public $table="carts";
     public $timestamps=false;
+    protected $guarded=[];
     use HasFactory;
 }

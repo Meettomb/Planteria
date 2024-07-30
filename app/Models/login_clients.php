@@ -9,5 +9,6 @@ class login_clients extends Model
 {
     public $table="login_clients";
     public $timestamps=false;
+    protected $guarded=[];
     use HasFactory;
 }

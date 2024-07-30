@@ -169,7 +169,8 @@ class login_controller extends Controller
                 Log::error('User not found with id: ' . $req->id);
                 return redirect()->back()->with('error', 'User not found.');
             }
-
+            
+            // dd($user);
             // Log before updating
             Log::info('User before update:', $user->toArray());
 
@@ -188,7 +189,7 @@ class login_controller extends Controller
 
             if ($updated) {
                 $carts = cart::where('uid', $req->id)->get();
-
+                // dd($carts);
                 foreach ($carts as $cart) {
                     $cart->first_name = $req->first_name;
                     $cart->last_name = $req->last_name;
