@@ -3,6 +3,7 @@
 use App\Http\Controllers\plants_c;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\login_controller;
+use App\Http\Controllers\feedback_c;
 use App\Http\Controllers\ForgatePasswordController;
 
 
@@ -32,9 +33,12 @@ Route::get('about', function () {
 });
 
 
-Route::get('contact', function () {
-    return view('contact');
-});
+
+
+Route::get('/contact', [feedback_c::class, 'getuserdetail'])->name('contact');
+Route::post('/contact', [feedback_c::class, 'save_feedback']);
+
+
 Route::get('news', function () {
     return view('news');
 });
@@ -180,7 +184,6 @@ Route::post('/all_blog','App\Http\Controllers\bloge_c@update_blog');
 
 
 Route::get('/all_login_list','App\Http\Controllers\login_controller@login_list');
-// Route::post('contact','App\Http\Controllers\feedback_c@feedback'); 
 
 
 Route::post('/orders', 'App\Http\Controllers\orders_c@checkout_order_add');
@@ -210,6 +213,9 @@ Route::post('/m_discount','App\Http\Controllers\plants_c@main_Discount');
 // check otp
 Route::get('/Mail',function(){
     return view('Mail');
+});
+Route::get('/Mail2',function(){
+    return view('Mail2');
 });
 
 
@@ -290,3 +296,7 @@ Route::post('/reset_password', [login_controller::class, 'resetPassword']);
 Route::get('Privacy_and_Policy_page', function () {
     return view('Privacy_and_Policy_page');
 });
+
+Route::get('/all_feedback_list', [feedback_c::class, 'get_all_feedback'])->name('all_feedback_list');
+
+Route::get('/See_full_feedback/{id}',[feedback_c::class, 'show_one_feedback']);

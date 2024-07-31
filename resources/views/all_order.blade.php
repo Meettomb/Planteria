@@ -93,12 +93,13 @@ if(session('admin')){
                     
                     <a href="plant_insert" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Product insert</a>
                     <a href="/bloge_insert" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Blog insert</a>
-                    <a href="/all_product" class="nav-item nav-link "><i class="fa fa-table me-2"></i>All Product</a>
-                    <a href="/all_blog" class="nav-item nav-link "><i class="fa fa-table me-2"></i>All Blog</a>
-                    <a href="/all_login_list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Login List</a>
-                    <a href="/all_order" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Order list</a>
+                    <a href="/all_product" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>All Product</a>
+                    <a href="/all_blog" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>All Blog</a>
+                    <a href="/all_login_list" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>Login List</a>
+                    <a href="/all_order" class="nav-item nav-link active"><i class="fa fa-solid fa-list"></i>Order list</a>
+                    <a href="/all_feedback_list" class="nav-item nav-link"><i class="fa fa-solid fa-comments"></i>Feedback</a>
                     <a href="/set_discount" class="nav-item nav-link"><i class="fa fa-percent me-2"></i>Set Discount</a>
-
+                    
                 </div>
             </nav>
         </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login list</title>
+    <title>All Blogs Data</title>
 
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -35,6 +35,10 @@
      <!-- icons -->
 	<link rel="stylesheet" href="{{asset('css/all.min.css')}}">
     <script src="{{asset('js\jQuery.js')}}"></script>   
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head>
 <body>
 @php
@@ -91,9 +95,9 @@ if(session('admin')){
                     <a href="/bloge_insert" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Blog insert</a>
                     <a href="/all_product" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>All Product</a>
                     <a href="/all_blog" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>All Blog</a>
-                    <a href="/all_login_list" class="nav-item nav-link active"><i class="fa fa-solid fa-list"></i>Login List</a>
+                    <a href="/all_login_list" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>Login List</a>
                     <a href="/all_order" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>Order list</a>
-                    <a href="/all_feedback_list" class="nav-item nav-link"><i class="fa fa-solid fa-comments"></i>Feedback</a>
+                    <a href="/all_feedback_list" class="nav-item nav-link active"><i class="fa fa-solid fa-comments"></i>Feedback</a>
                     <a href="/set_discount" class="nav-item nav-link"><i class="fa fa-percent me-2"></i>Set Discount</a>
                     
                 </div>
@@ -139,32 +143,21 @@ if(session('admin')){
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">userid</th>
-                                            <th scope="col">First Name</th>
-                                            <th scope="col">Last Name</th>
-                                            <th scope="col">gender</th>
-                                            <th scope="col">DOB</th>
+                                            <th scope="col">Name</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Address</th>
-                                            <th scope="col">Pincode</th>
-                                            <th>Action</th>
+                                            <th scope="col">Message</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
-                                    @foreach($data as $in)
+                                    @foreach($info as $in)
                                     <tbody>
                                         <tr class="tr2" >
                                             <td scope="row">{{$loop->iteration}}</td>
-                                            <td scope="row">{{$in->id}}</td>
-                                            <td scope="row">{{$in->first_name}}</td>
-                                            <td scope="row">{{$in->last_name}}</td>
-                                            <td scope="row">{{$in->gender}}</td>
-                                            <td scope="row">{{$in->dob}}</td>
-                                            <td scope="row">{{$in->email}}</td>
-                                            <td scope="row">{{$in->phone}}</td>
-                                            <td scope="row">{{$in->address}}</td>
-                                            <td scope="row">{{$in->pincode}}</td>
-                                            <td><a href="/person_details/{{$in->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                            <td>{{$in->name}}</td>
+                                            <td>{{$in->email}}</td>
+                                            <td>{{$in->message}}</td>
+                                            <td><a onclick="confirmation(event)" title="Delete Data" href="/all_blog/{{$in->id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            <a title="See Data" href="/See_full_feedback/{{$in->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                         </tr>
                                     </tbody>
                                     @endforeach
@@ -190,7 +183,7 @@ if(session('admin')){
     <script src="{{asset('jsjava/main.js')}}"></script>
 
     
-    <script>
+<script>
     $(document).ready(function(){
         $("#myInput").on("keyup",function(){    //This Id Is Search Field Id
             var value = $(this).val().toLowerCase();
@@ -200,5 +193,43 @@ if(session('admin')){
         });
     });
 </script>
+
+
+<script>
+        function confirmation(ev) {
+            ev.preventDefault();
+            var urlToRedirect = ev.currentTarget.getAttribute('href');
+            console.log(urlToRedirect);
+            new swal({
+                    title: "Are you sure to delete this Data?",
+                    text: "You will not be able to revert this!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willCancel) => {
+                    if (willCancel) {
+                        $.ajaxSetup({
+                            headers: {
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                            },
+                        });
+                        $.ajax({
+                            Method: "DELETE",
+                            url: urlToRedirect,
+                            data: {
+                                dataType: 'json',
+                                contentType: 'application/json',
+                            },
+                            success: function(data) {
+                                location.href = location.href;
+                            },
+                        });
+                    }
+                });
+        }
+</script>
+
+
 </body>
 </html>

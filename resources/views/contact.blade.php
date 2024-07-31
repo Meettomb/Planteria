@@ -63,14 +63,7 @@
 	
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
-	@if(session('error'))
-	<div class="alert alert-danger alert-dismissible fade show" style="z-index: 1000;"role="alert">
-		{{ session('error') }}
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-@endif
+	
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
@@ -83,7 +76,22 @@
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
-
+	@if(session('error'))
+		<div class="alert alert-danger alert-dismissible fade show" style="z-index: 1000;"role="alert">
+			{{ session('error') }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	@endif
+	@if(session('success'))
+		<div class="alert alert-success alert-dismissible fade show" style="z-index: 1000;"role="alert">
+			{{ session('success') }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	@endif
 	<!-- contact form -->
 	<div class="contact-from-section mt-150 mb-150">
 		<div class="container">
@@ -95,18 +103,16 @@
 					</div>
 				 	<div id="form_status"></div>
 					<div class="contact-form">
-						<form id="fruitkha-contact">
+						<form id="fruitkha-contact" action="{{ route('contact') }}" method="POST">
+							@csrf
 							<p>
-								<input type="text" placeholder="Name" name="name" id="name" autocomplete="off">
-								<input type="email" placeholder="Email" name="email" id="email" autocomplete="off">
+								<input type="text" placeholder="Name" name="name" value="{{$data->first_name}}" id="name" autocomplete="off">
+								<input type="email" placeholder="Email" name="email" value="{{$data->email}}" id="email" autocomplete="off">
 							</p>
-							<p>
-								<input type="tel" placeholder="Phone" maxlength="10" name="phone" id="phone" autocomplete="off">
-								<input type="text" placeholder="Subject" name="subject" id="subject" autocomplete="off">
-							</p>
+						
 							<p><textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea></p>
 							<input type="hidden" name="token" value="FsWga4&@f6aw" />
-							<p><input type="submit" value="Submit" onclick="sendMail()"></p>
+							<p><input type="submit" value="Submit" name="submit"></p>
 						</form>
 					</div>
 				</div>

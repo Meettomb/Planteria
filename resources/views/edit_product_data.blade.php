@@ -89,17 +89,17 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="admin_index" class="nav-item nav-link"><i
-                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-
-                    <a href="/plant_insert" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Product insert</a>
+                    <a href="admin_index" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    
+                    <a href="plant_insert" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Product insert</a>
                     <a href="/bloge_insert" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Blog insert</a>
-                    <a href="/all_product" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>All
-                        Product</a>
-                    <a href="/all_blog" class="nav-item nav-link"><i class="fa fa-table me-2"></i>All Blog</a>
-                    <a href="/all_login_list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Login List</a>
-                    <a href="/all_order" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Order list</a>
-
+                    <a href="/all_product" class="nav-item nav-link active"><i class="fa fa-solid fa-list"></i>All Product</a>
+                    <a href="/all_blog" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>All Blog</a>
+                    <a href="/all_login_list" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>Login List</a>
+                    <a href="/all_order" class="nav-item nav-link"><i class="fa fa-solid fa-list"></i>Order list</a>
+                    <a href="/all_feedback_list" class="nav-item nav-link"><i class="fa fa-solid fa-comments"></i>Feedback</a>
+                    <a href="/set_discount" class="nav-item nav-link"><i class="fa fa-percent me-2"></i>Set Discount</a>
+                    
                 </div>
             </nav>
         </div>
@@ -129,8 +129,9 @@
                 </div>
             </nav>
 
-
             <div class="col-sm-12 col-xl-6" id="blog_form">
+                <p style="color: darkcyan; cursor:pointer; font-size: 18px;" onclick="goBack()">back to list</p>
+                        
                 <div class="bg-light rounded h-100 p-4">
 
                     <form action="/edit" method="post" enctype="multipart/form-data">
@@ -214,7 +215,11 @@
         </div>
 
 
-
+        <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
 
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

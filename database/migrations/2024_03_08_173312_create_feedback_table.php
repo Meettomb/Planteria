@@ -15,8 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->String('name');
             $table->String('email');
-            $table->String('phone');
-            $table->String('subject');
             $table->longText('message');
             $table->timestamps();
         });
