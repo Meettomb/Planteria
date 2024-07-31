@@ -122,7 +122,7 @@
 						</div>
 						<div class="contact-form-box">
 							<h4><i class="fas fa-address-book"></i> Contact</h4>
-							<p>Phone: +00 111 222 3333 <br> Email: ourplanteria@gmail.com</p>
+							<p>Phone: +91 972 525 4775 <br> Email: ourplanteria@gmail.com</p>
 						</div>
 					</div>
 				</div>

@@ -136,43 +136,10 @@
 									@else
 										<span class="login"><a href="/log_new"><span class="{{$user_first}}">{{ substr(session('user'), 0, 1) }}</span> {{$logname}}</a></span>
 									@endif
+								</li>
 								</div>
 
-								<div id="profilePopup" class="profile_popup">
-									<div class="popup_content">
-										<span class="close_popup"></span>
-										<h2>Manage Profile</h2>
-										<form action="" method="POST">
-											<label for="">First name</label>
-											<input type="text"><br>
-
-											<label for="">Last name</label>
-											<input type="text"><br>
-
-											<label for="">Gender</label>
-											<input type="text"><br>
-
-											<label for="">Date of Birth</label>
-											<input type="text"><br>
-
-											<label for="">Email</label>
-											<input type="email"><br>
-
-											<label for="">Phone number</label>
-											<input type="text"><br>
-
-											<label for="">Address</label>
-											<input type="text"><br>
-
-											<label for="">Pincode</label>
-											<input type="text"><br>
-
-											<button>Save</button>
-										</form>
-										<!-- Add your manage profile content here -->
-									</div>
-								</div>
-
+								
 										
 									</div>
 

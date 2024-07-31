@@ -46,7 +46,7 @@
 						<ul>
 						<li>34/8, East Bopal <br> Guajrat, Ahmedabad, India</li>
 							<li>ourplanteria@gmail.com</li>
-							<li>+00 111 222 3333</li>
+							<li>+91 972 525 4775</li>
 						</ul>
 					</div>
 				</div>

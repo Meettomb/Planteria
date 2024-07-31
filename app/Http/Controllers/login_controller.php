@@ -208,7 +208,43 @@ class login_controller extends Controller
         return view('person_details',['data'=>$data]);
     }
     
-    
+    public function gat_data_for_resate_password(){
+
+        if(session()->has('userid')){
+            
+            $userid = session()->get('userid');
+            $user = login_clients::find($userid);
+             
+            return view('resate_password',['data'=>$user]);
+             
+        } else {
+            return redirect('/log_new');
+        }
+    }
+
+    public function resetPassword(Request $req)
+    {
+        $req->validate([
+            'Password' => 'required|string|min:6',
+            'Confirme_Password' => 'required|string|same:Password',
+        ]);
+
+        try {
+            $user = login_clients::find($req->id);
+            if (!$user) {
+                return redirect()->back()->with('error', 'User not found.');
+            }
+
+            $user->password = bcrypt($req->Password);
+            $user->save();
+
+            return redirect('/resate_password')->with('success', 'Password updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Password reset failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while resetting the password.');
+        }
+    }
+
 }
 
 

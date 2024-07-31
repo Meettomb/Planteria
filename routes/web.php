@@ -31,9 +31,7 @@ Route::get('about', function () {
     return view('about');
 });
 
-// Route::get('checkout', function () {
-//     return view('checkout');
-// });
+
 Route::get('contact', function () {
     return view('contact');
 });
@@ -285,8 +283,10 @@ Route::post('/product_image_edit', [plants_c::class, 'update_product_image_edit'
 // routes/web.php
 
 // routes/web.php
+Route::get('/resate_password', [login_controller::class, 'gat_data_for_resate_password']);
+Route::post('/reset_password', [login_controller::class, 'resetPassword']);
 
-// login and password
-// meet@gmail.com
-// b@g.com
-// 123
+
+Route::get('Privacy_and_Policy_page', function () {
+    return view('Privacy_and_Policy_page');
+});

@@ -13,7 +13,6 @@
     margin-top: 150px;
     display: flex;
     width: 100%;
-    position: fixed;
     justify-content: center;
 }
 .manage_profile_container section{
@@ -24,7 +23,7 @@
 
 
 input[type='submit']{
-    width: 90%;
+    width: 80%;
     margin-top: 20px;
     margin-left: 30px;   
     text-align: center; 
@@ -45,26 +44,18 @@ input[type='text']{
     border-style: solid;
     padding: 0 5px;
     height: 2.5em;
-    width: 250px;
+    width: 100%;
     
     margin-left: 30px;
     margin-top: 20px;
 }
 
 .input-box{
-    /* margin: 0.5em 0;       */
-    display: flex;
-    /* background-color: #051922; */
-}
-table{
-    display: flex;
-    align-items: center;
-}
-th{
-    width: 50%;
-}
-tr{
     width: 100%;
+}
+
+th{
+    width: 24%;
 }
 td{
     width: 90%;

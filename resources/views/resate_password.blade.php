@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setting</title>
+    <title>Resate Password</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
             z-index: 999;
         }
         .footer{
-            margin-top: 30px;
+            margin-top: 210px;
         }
     </style>
 </head>
@@ -100,73 +100,69 @@
 
 <div class="manage_profile_container">
 <section class="container">
-    <h1>Change Details</h1>
+    <h2>Resate your password</h2>
     @isset($data)
 
-    <form action="/Setting" method="post" class="form">
-        @csrf
-        <!-- user id as hidden-->
-        <input type="hidden" name="id" value="{{ $data->id }}">
-        <table>
-            
-                    <tr>
-                        <th><label for="first_name">First name : </label></th>
-                        <td><input type="text" id="first_name" name="first_name" value="{{ $data->first_name }}"></td>
-                    </tr>
+    <form action="/reset_password" method="post" class="form">
+    @csrf
+    <input type="hidden" name="id" value="{{ $data->id }}">
+    <td><input type="hidden" id="email" name="email" value="{{ $data->email }}" readonly></td>
+    <table>
+        
+    <tr>
+            <div class="input-box">
+                <th><label for="Password">Password</label></th>
+                <td><input style="width: 100%;" type="password" id="Password" name="Password" required></td>
+            </div>
+        </tr>
+        <tr>
+            <div class="input-box">
+                <th><label for="Confirme_Password">Confirm Password</label></th>
+                <td><input style="width: 100%;" type="password" id="Confirme_Password" name="Confirme_Password" required></td>
+            </div>
+        </tr>
+        <tr>
+            <div class="input-box">
+                <th></th>
+                <td>
+                    <label><input style="width: 30px;" onclick="togglePasswordVisibility();" type="checkbox"></label> Show Passwords
+                </td>
+            </div>
+        </tr>
+        <tr>
+        
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" value="Save">
+            </td>
+        </tr>
+    </table>
+</form>
 
-                    <tr>
-                        <th><label for="last_name">Last name : </label></th>
-                        <td><input type="text" id="last_name" name="last_name" value="{{ $data->last_name }}"></td>
-                    </tr>
-
-                    <tr>
-                        <th><label for="address">Address : </label></th>
-                        <td><input type="text" name="address" id="address" value="{{ $data->address }}"></td>
-                    </tr>
-
-                    <tr>
-                        <th><label for="pincode">Pincode : </label></th>
-                        <td><input type="text" name="pincode" id="pincode" value="{{ $data->pincode }}"></td>
-                    </tr>
-
-                    <tr>
-                        <th><label for="phone">Phone No :</label></th>
-                        <td><input type="text" name="phone" id="phone" value="{{ $data->phone }}"></td>
-                    </tr>
-
-                    <tr>
-                        
-                        <th><label for="dob">DOB :</label></th>
-                        <td><input type="text" name="dob" id="dob" value="{{ $data->dob }}"></td>
-                    </tr>
-
-                    <tr>
-                        <th><label for="dob">Gender :</label></th>
-                        <td><input type="text" name="gender" id="gender" value="{{ $data->gender }}"></td>
-                    </tr>
-
-                    <tr>
-                        <th></th>
-                        <td>
-                            <input type="submit" value="Save">
-                        </td>
-                    </tr>
-                
-        </table>
-    </form>
 
     @endisset
 </section>
 
 
-    <!-- Error handing  -->
-   
+ 
 </div>
 
 <div class="footer">
 
     @include('footer')
 </div>
+
+
+    <script>
+		function togglePasswordVisibility() {
+    var passwordField = document.getElementById('Password');
+    var confirmPasswordField = document.getElementById('Confirme_Password');
+    var type = passwordField.type === 'password' ? 'text' : 'password';
+    passwordField.type = type;
+    confirmPasswordField.type = type;
+}
+	</script>
 
 <!-- jquery -->
     <script src="{{asset('js/jquery-1.11.3.min.js')}}"></script>
@@ -188,6 +184,7 @@
 	<script src="{{asset('js/sticker.js')}}"></script>
 	<!-- main js -->
 	<script src="{{asset('js/main.js')}}"></script>
+
 
 </body>
 </html>
