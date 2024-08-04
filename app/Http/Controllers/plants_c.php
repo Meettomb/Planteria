@@ -323,19 +323,6 @@ class plants_c extends Controller
         $after_discount = $req->main_price - $percentage;
         $data->dis_price = $after_discount;
 
-        // updating cart after updating product
-        // $product_in_cart = cart::where('pid',$req->id)->get();
-        // if($product_in_cart){
-        //     $product_in_cart->pid = $req->id;
-        //     $product_in_cart->product_name = $req->p_name;
-        //     $product_in_cart->main_price = $req->main_price;
-        //     $product_in_cart->dis_price = $after_discount->dis_price;
-        //     if($req->quantity == 0){
-        //         $product_in_cart->quantity = $req->quantity;
-        //     }
-        //     $product_in_cart->save();
-        // }
-
 
         $Id = $data->save();
         return redirect('all_product');

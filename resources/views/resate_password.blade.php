@@ -100,7 +100,7 @@
 
 <div class="manage_profile_container">
 <section class="container">
-    <h2>Resate your password</h2>
+    <h2>Reset your password</h2>
     @isset($data)
 
     <form action="/reset_password" method="post" class="form">
@@ -108,8 +108,7 @@
     <input type="hidden" name="id" value="{{ $data->id }}">
     <td><input type="hidden" id="email" name="email" value="{{ $data->email }}" readonly></td>
     <table>
-        
-    <tr>
+    <tr >
             <div class="input-box">
                 <th><label for="Password">Password</label></th>
                 <td><input style="width: 100%;" type="password" id="Password" name="Password" required></td>

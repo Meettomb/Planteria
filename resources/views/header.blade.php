@@ -115,7 +115,6 @@
 									</ul>
 								</li>
 
-								<li><a href="/news">News</a></li>
 
 								<li><a href="/contact">Contact</a></li>
 

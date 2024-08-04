@@ -57,8 +57,8 @@
 							<li><a href="/">Home</a></li>
 							<li><a href="/about">About</a></li>
 							<li><a href="/shop">Shop</a></li>
-							<li><a href="/news">News</a></li>
 							<li><a href="/contact">Contact</a></li>
+							<li><a href="/blog">Blog</a></li>
 							<!-- @if(session('admin'))
                             <li><a href="/admin_index" >Admin Page</a></li>
                             @endif -->
