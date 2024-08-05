@@ -206,7 +206,6 @@ if(session('admin')){
     <!-- Template Javascript -->
     <script src="{{asset('jsjava/main.js')}}"></script>
 
-    
     <script>
     $(document).ready(function(){
         $("#myInput").on("keyup",function(){    //This Id Is Search Field Id
