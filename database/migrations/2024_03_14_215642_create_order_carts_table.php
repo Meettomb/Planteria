@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('product_name')->nullable();
             $table->string('dis_price')->nullable();
             $table->string('quantity')->nullable();
-            $table->string('order_id')->nullable();
+            $table->bigInteger('order_id')->unique();
             $table->string('status')->nullable();
             $table->timestamps();
         });

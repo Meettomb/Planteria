@@ -135,38 +135,40 @@ if(session('admin')){
             </nav>
 
         <div class="col-sm-12 col-xl-6" id="blog_form">
-        <p style="color: darkcyan; cursor:pointer; font-size: 18px;" onclick="goBack()">back to list</p>
-             
-                        <div class="bg-light rounded h-100 p-4">
-                            <form action="/all_blog" method="post" enctype="multipart/form-data">
-                                @csrf
-                            <h6 class="mb-4">Edit your Blog details</h6>
-                            <input type="hidden" name="id" value="{{$data->id}}">
-                            <div class="form-floating mb-3">
-                                <input type="text" name="title" class="form-control" id="floatingInput"
-                                    placeholder="Blog title" value="{{$data->title}}">
-                                <label for="floatingInput">Bolg title</label>
-                            </div>
-
-                            <div class="form-floating mb-3">
-                                <input type="date" name="date" class="form-control" id="floatingPassword"
-                                    placeholder="Password" value="{{$data->date}}">
-                                <label for="floatingPassword">Blog Release Date</label>
-                            </div>
-                            
-                            <div class="form-floating">
-                                <textarea class="form-control" name="content" value="" placeholder="Leave a comment here"
-                                    id="floatingTextarea" style="height: 250px;">{{$data->contant}}</textarea>
-                                <label for="floatingTextarea">Contant</label>
-                            </div>
-
-                            <button type="submit" name="submit" class="btn btn-primary">Submit Your Blog</button>
-                            </form>
-                        </div>
+            <p style="color: darkcyan; cursor:pointer; font-size: 18px;" onclick="goBack()">back to list</p>
+                <div class="bg-light rounded h-100 p-4">
+                    <form action="/all_blog" method="post" enctype="multipart/form-data">
+                        @csrf
+                    <h6 class="mb-4">Edit your Blog details</h6>
+                    <input type="hidden" name="id" value="{{$data->id}}">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="title" class="form-control" id="floatingInput"
+                            placeholder="Blog title" value="{{$data->title}}">
+                        <label for="floatingInput">Bolg title</label>
                     </div>
 
+                    <div class="form-floating mb-3">
+                        <input type="date" name="date" class="form-control" id="floatingPassword"
+                            placeholder="Password" value="{{$data->date}}">
+                        <label for="floatingPassword">Blog Release Date</label>
+                    </div>
+                    
+                    <div class="form-floating">
+                        <textarea class="form-control" name="content" value="" placeholder="Leave a comment here"
+                            id="floatingTextarea" style="height: 250px;">{{$data->contant}}</textarea>
+                        <label for="floatingTextarea">Contant</label>
+                    </div>
 
-</div>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit Your Blog</button>
+                    </form>
+                </div>
+        </div>
+
+
+
+
+
+    </div>
 
 <script>
         function goBack() {

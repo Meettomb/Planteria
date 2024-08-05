@@ -130,6 +130,7 @@
 										<div class="profile_drop">
 											<!-- <a class="mange_profile" href="#" id="manageProfileLink">Manage Profile</a> -->
 											<a class="mange_profile" href="/Setting">Setting</a><br>
+											<a class="mange_profile" href="/show_orders">Show Orders</a><br>
 											<a class="logout_link" href="/logout">Logout</a>
 										</div>
 									@else

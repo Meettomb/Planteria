@@ -173,6 +173,17 @@ if(session('admin')){
                                         <th>Pincode</th>
                                         <td>{{ $data->pincode }}</td>
                                     </tr>
+                                    </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td>
+                                            @if($data->isactive == 1)
+                                                Active
+                                            @else
+                                                Inactive
+                                            @endif
+                                        </td>
+                                    </tr>
                             </tbody>
                             
                         </table>

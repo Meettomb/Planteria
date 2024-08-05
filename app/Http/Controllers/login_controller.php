@@ -15,8 +15,7 @@ use Exception;
 class login_controller extends Controller
 {
     //
-    public function register(Request $req)
-    {
+    public function register(Request $req){
         // Validate the request data
         $validatedData = $req->validate([
             'first_name' => 'required|string|max:255',
@@ -85,6 +84,7 @@ class login_controller extends Controller
             $client->address = $data->address;
             $client->pincode = $data->pincode;
             $client->password = Hash::make($data->password);
+            $client->isactive = true;
 
             if ($client->save()) {
                 return redirect()->route('log_new'); // Redirect using the named route
@@ -102,27 +102,41 @@ class login_controller extends Controller
     public function login_wall(Request $req){
         $data=login_clients::where('email',$req->email)->get();
         $logout="";
-        if($data->isNotEmpty()){
-            if(Hash::check($req->password,$data[0]->password)){ 
-                // Hash::check($req->Password,$data[0]->Password)
-                if($data[0]->role=='user'){
-                    $req->session()->put('user',$data[0]->first_name);
-                    $req->session()->put('userid',$data[0]->id);
-                    
-                    $count = cart::where('uid',$data[0]->id)->count();
-                    $req->session()->put('count',$count);
-                
-                    return redirect()->back();
+        if ($data->isNotEmpty()) {
+            $user = $data[0];
+    
+            // Check if the provided password matches the stored hash
+            if (Hash::check($req->password, $user->password)) {
+    
+                // Check if the user is active
+                if ($user->isactive) {
+                    // Check the role and redirect accordingly
+                    if ($user->role == 'user') {
+                        $req->session()->put('user', $user->first_name);
+                        $req->session()->put('userid', $user->id);
+                        
+                        // Get the count of items in the cart
+                        $count = cart::where('uid', $user->id)->count();
+                        $req->session()->put('count', $count);
+    
+                        return redirect()->back();
+                    }
+    
+                    if ($user->role == 'admin') {
+                        $req->session()->put('admin', $user->first_name);
+                        return redirect('/admin_index');
+                    }
+                } else {
+                    // User is not active
+                    return redirect()->back()->with('isactive_error', 'Your account is not active. Please contact support.');
                 }
-                if($data[0]->role=='admin'){
-                    $req->session()->put('admin',$data[0]->first_name);
-                    return redirect('/admin_index');
-                }
-            }else{
-                return redirect()->back()->with('pass_error','Password dose not match');
+            } else {
+                // Password does not match
+                return redirect()->back()->with('pass_error', 'Password does not match');
             }
-        }else{
-            return redirect()->back()->with('email_error','Email dose not match');
+        } else {
+            // Email does not match
+            return redirect()->back()->with('email_error', 'Email does not match');
         }
     }
 
@@ -242,6 +256,35 @@ class login_controller extends Controller
         } catch (\Exception $e) {
             Log::error('Password reset failed: ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while resetting the password.');
+        }
+    }
+
+
+    public function get_edit_clint($id){
+        $data = login_clients::find($id);
+        return view('edit_clint',['data'=>$data]);
+    }
+
+    public function status_data($id){
+        $data = order_cart::find($id);
+        return view('edit_order',['data'=>$data]);
+    }
+
+    public function updateClientStatus(Request $request)
+    {
+       
+
+        // Find the user by ID and update the isactive status
+        $user = login_clients::find($request['id']);
+        $user->isactive = $request['status'];
+
+        // Save the updated user data
+        if ($user->save()) {
+            // Redirect back with success message
+            return redirect('all_login_list')->with('success', 'User status updated successfully.');
+        } else {
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'Failed to update user status.');
         }
     }
 

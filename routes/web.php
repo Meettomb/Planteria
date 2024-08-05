@@ -101,13 +101,7 @@ Route::get('/sale','App\Http\Controllers\plants_c@sale');
 
 
 
-Route::post('/login_form','App\Http\Controllers\login_controller@login_wall');
-Route::get('logout',function(){
-    if(session()->has('user')){
-        session()->pull('user');
-    }
-    return redirect('/');
-});
+
 
 
 Route::post('/cart/{id}','App\Http\Controllers\plants_c@addcart');
@@ -131,6 +125,19 @@ Route::get('/gardening_service', function(){
     return view('gardening_service');
 });
 
+Route::post('/login_form','App\Http\Controllers\login_controller@login_wall');
+Route::get('logout',function(){
+    if(session()->has('user')){
+        session()->pull('user');
+    }
+    return redirect('/');
+});
+Route::get('logout',function(){
+    if(session()->has('admin')){
+        session()->pull('admin');
+    }
+    return redirect('/');
+});
 Route::get('login_form',function(){
     if(session()->has('user')){
         return redirect('/');
@@ -300,3 +307,5 @@ Route::get('Privacy_and_Policy_page', function () {
 Route::get('/all_feedback_list', [feedback_c::class, 'get_all_feedback'])->name('all_feedback_list');
 
 Route::get('/See_full_feedback/{id}',[feedback_c::class, 'show_one_feedback']);
+Route::get('/edit_clint/{id}',[login_controller::class, 'get_edit_clint']);
+Route::post('/edit_clint',[login_controller::class, 'updateClientStatus']);

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('pincode');
             $table->string('password');
             $table->string('role')->default('user');
+            $table->boolean('isactive')->default(true);
             $table->timestamps();
         });
     }

@@ -128,9 +128,6 @@ class orders_c extends Controller
     
                 return redirect('show_orders');
             } 
-            // else {
-            //     // Handle the case where the product is not found
-            // }
         }
 
         if($result>0)

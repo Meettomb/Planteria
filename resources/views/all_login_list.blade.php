@@ -32,6 +32,9 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- Bootstarp -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
      <!-- icons -->
 	<link rel="stylesheet" href="{{asset('css/all.min.css')}}">
     <script src="{{asset('js\jQuery.js')}}"></script>   
@@ -134,6 +137,16 @@ if(session('admin')){
             <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Product Table</h6>
+
+                            @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show z-3" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>   
+                            @endif
+
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -141,13 +154,11 @@ if(session('admin')){
                                             <th scope="col">#</th>
                                             <th scope="col">userid</th>
                                             <th scope="col">First Name</th>
-                                            <th scope="col">Last Name</th>
                                             <th scope="col">gender</th>
-                                            <th scope="col">DOB</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone</th>
-                                            <th scope="col">Address</th>
                                             <th scope="col">Pincode</th>
+                                            <th scope="col">Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -157,14 +168,20 @@ if(session('admin')){
                                             <td scope="row">{{$loop->iteration}}</td>
                                             <td scope="row">{{$in->id}}</td>
                                             <td scope="row">{{$in->first_name}}</td>
-                                            <td scope="row">{{$in->last_name}}</td>
                                             <td scope="row">{{$in->gender}}</td>
-                                            <td scope="row">{{$in->dob}}</td>
                                             <td scope="row">{{$in->email}}</td>
                                             <td scope="row">{{$in->phone}}</td>
-                                            <td scope="row">{{$in->address}}</td>
                                             <td scope="row">{{$in->pincode}}</td>
-                                            <td><a href="/person_details/{{$in->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                            <td scope="row">
+                                            @if($in->isactive == 1)
+                                                Active
+                                            @else
+                                                Inactive
+                                            @endif
+                                            <td>
+                                                <a href="/edit_clint/{{$in->id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                                <a href="/person_details/{{$in->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                     @endforeach
@@ -176,7 +193,7 @@ if(session('admin')){
 
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{asset('lib/chart/chart.min.js')}}"></script>
     <script src="{{asset('lib/easing/easing.min.js')}}"></script>
